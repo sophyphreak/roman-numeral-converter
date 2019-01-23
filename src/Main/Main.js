@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Col, Input, Row } from 'reactstrap';
+import { Button, Col, Input, Row } from 'reactstrap';
 import { rowStyle, pStyle } from './mainStyle';
 import convertToRoman from './convertToRoman/convertToRoman';
 import isInvalidNumber from './validation/isInvalidNumber';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { ClippyIcon } from 'react-octicons';
 
 class Main extends Component {
   constructor(props) {
@@ -28,13 +30,29 @@ class Main extends Component {
   render() {
     return (
       <Row style={rowStyle}>
-        <Col sm={{ size: 6, offset: 3 }} xs="12">
+        <Col md={{ size: 4, offset: 4 }} sm={{ size: 6, offset: 3 }} xs="12">
           <Input
             value={this.state.inputNumber}
             onChange={this.handleChange}
-            placeholder="please enter a whole number between 0 and 4999"
+            placeholder="enter a whole number between 0 and 4999"
           />
-          <p style={pStyle}>{this.state.outputRomanNumeral}</p>
+          <p style={pStyle}>and then...</p>
+          <Input
+            value={this.state.outputRomanNumeral}
+            placeholder="the roman numeral will appear here"
+            disabled="true"
+          />
+          <br />
+          {this.state.outputRomanNumeral && (
+            <CopyToClipboard
+              className="animated fadeIn"
+              text={this.state.outputRomanNumeral}
+            >
+              <Button color="link">
+                <ClippyIcon />
+              </Button>
+            </CopyToClipboard>
+          )}
         </Col>
       </Row>
     );
