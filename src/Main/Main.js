@@ -40,7 +40,7 @@ class Main extends Component {
           <Input
             value={this.state.outputRomanNumeral}
             placeholder="the roman numeral will appear here"
-            disabled="true"
+            readOnly="true"
           />
           <br />
           {this.state.outputRomanNumeral && (
